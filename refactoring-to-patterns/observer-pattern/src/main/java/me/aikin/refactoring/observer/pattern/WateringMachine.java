@@ -17,7 +17,9 @@ public class WateringMachine implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (((WeatherParams) arg).getTemp() > 10 && ((WeatherParams) arg).getHumidity() < 55 && ((WeatherParams) arg).getWindPower() < 4)
+        if (((WeatherParams) arg).getTemp() > 10
+                && ((WeatherParams) arg).getHumidity() < 55
+                && ((WeatherParams) arg).getWindPower() < 4)
             start();
     }
 }
