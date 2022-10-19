@@ -16,6 +16,8 @@ public class SeedingMachine implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        start();
+        if (((WeatherParams) arg).getTemp() > 5) {
+            start();
+        }
     }
 }

@@ -14,15 +14,12 @@ public class WeatherData extends Observable {
     }
 
     public void measurementsChanged(WeatherParams weatherParams) {
-        if (weatherParams.getTemp() > 5) {
-            seedingMachine.start();
 
         setChanged();
-        notifyObservers(weatherParams.getTemp());
+        notifyObservers(weatherParams);
 
-            if (weatherParams.getHumidity() > 65)
-                reapingMachine.start();
-        }
+        if (weatherParams.getHumidity() > 65)
+            reapingMachine.start();
 
         if (weatherParams.getTemp() > 10 && weatherParams.getHumidity() < 55 && weatherParams.getWindPower() < 4)
             wateringMachine.start();
