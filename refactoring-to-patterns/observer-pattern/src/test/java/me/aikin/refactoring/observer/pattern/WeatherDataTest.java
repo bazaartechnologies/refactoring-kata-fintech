@@ -18,6 +18,7 @@ public class WeatherDataTest {
 
     @Test
     public void seeding_machine_should_start_if_temperature_over_5_degree() {
+        weatherData.addObserver(seedingMachine);
         weatherData.measurementsChanged(new WeatherParams(10, 0, 0));
 
         assertTrue(seedingMachine.getStatus());
