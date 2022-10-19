@@ -8,10 +8,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class MenuItemTest {
-    private static Ingredient flour = CreateFlour();
-    private static Ingredient yolk = CreateYolk();
-    private static MenuItem moonCake = CreateMoonCake();
+public class MenuItemClassTest {
+    private static IngredientClass flour = CreateFlour();
+    private static IngredientClass yolk = CreateYolk();
+    private static MenuItemClass moonCake = CreateMoonCake();
 
     @Test
     public void should_calc_health_rating_Ingredient() {
@@ -50,20 +50,20 @@ public class MenuItemTest {
         assertTrue(moonCake.getCalory().contains("Cooking will double calories!!!"));
     }
 
-    private static Ingredient CreateFlour() {
+    private static IngredientClass CreateFlour() {
         NutritionInfo nutrition = new NutritionInfo(1, 10, 100d);
-        return new Ingredient(nutrition);
+        return new IngredientClass(nutrition);
     }
 
-    private static Ingredient CreateYolk() {
+    private static IngredientClass CreateYolk() {
         NutritionInfo nutrition = new NutritionInfo(2, 20, 200d);
 
-        return new Ingredient(nutrition);
+        return new IngredientClass(nutrition);
     }
 
-    private static MenuItem CreateMoonCake() {
-        List<Ingredient> ingredients = Arrays.asList(flour, yolk);
-        MenuItem menuItem = new MenuItem(ingredients);
-        return menuItem;
+    private static MenuItemClass CreateMoonCake() {
+        List<IngredientClass> ingredientClasses = Arrays.asList(flour, yolk);
+        MenuItemClass menuItemClass = new MenuItemClass(ingredientClasses);
+        return menuItemClass;
     }
 }
