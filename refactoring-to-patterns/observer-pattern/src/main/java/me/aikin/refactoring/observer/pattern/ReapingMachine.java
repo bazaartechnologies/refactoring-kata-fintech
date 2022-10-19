@@ -1,18 +1,8 @@
 package me.aikin.refactoring.observer.pattern;
 
 import java.util.Observable;
-import java.util.Observer;
 
-public class ReapingMachine implements Observer {
-    private Boolean status;
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void start() {
-        this.status = true;
-    }
+public class ReapingMachine extends Machine {
 
     @Override
     public void update(Observable o, Object arg) {
