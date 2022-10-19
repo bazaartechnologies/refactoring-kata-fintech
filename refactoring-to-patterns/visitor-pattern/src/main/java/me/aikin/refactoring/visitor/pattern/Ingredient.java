@@ -1,5 +1,9 @@
 package me.aikin.refactoring.visitor.pattern;
 
+import java.util.List;
+
 public interface Ingredient {
-    void add(MoonCake moonCake);
+    int getHealthRating();
+    String getProtein();
+    String getCalory();
 }

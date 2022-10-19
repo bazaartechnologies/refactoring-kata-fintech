@@ -9,9 +9,25 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class MenuItemClassTest {
-    private static IngredientClass flour = CreateFlour();
-    private static IngredientClass yolk = CreateYolk();
-    private static MenuItemClass moonCake = CreateMoonCake();
+    private static Ingredient flour = CreateFlour();
+    private static Ingredient yolk = CreateYolk();
+    private static MenuItem moonCake = CreateMoonCake();
+
+    private static Ingredient CreateFlour() {
+        NutritionInfo nutrition = new NutritionInfo(1, 10, 100d);
+        return new Flour(nutrition);
+    }
+
+    private static Ingredient CreateYolk() {
+        NutritionInfo nutrition = new NutritionInfo(2, 20, 200d);
+
+        return new Yolk(nutrition);
+    }
+
+    private static MenuItem CreateMoonCake() {
+        List<Ingredient> Ingredientes = Arrays.asList(flour, yolk);
+        return new MoonCake(Ingredientes);
+    }
 
     @Test
     public void should_calc_health_rating_Ingredient() {
@@ -48,22 +64,5 @@ public class MenuItemClassTest {
         assertTrue(moonCake.getCalory().contains("10 J"));
         assertTrue(moonCake.getCalory().contains("20 J"));
         assertTrue(moonCake.getCalory().contains("Cooking will double calories!!!"));
-    }
-
-    private static IngredientClass CreateFlour() {
-        NutritionInfo nutrition = new NutritionInfo(1, 10, 100d);
-        return new IngredientClass(nutrition);
-    }
-
-    private static IngredientClass CreateYolk() {
-        NutritionInfo nutrition = new NutritionInfo(2, 20, 200d);
-
-        return new IngredientClass(nutrition);
-    }
-
-    private static MenuItemClass CreateMoonCake() {
-        List<IngredientClass> ingredientClasses = Arrays.asList(flour, yolk);
-        MenuItemClass menuItemClass = new MenuItemClass(ingredientClasses);
-        return menuItemClass;
     }
 }

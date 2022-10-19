@@ -1,35 +1,28 @@
 package me.aikin.refactoring.visitor.pattern;
 
-public class IngredientClass {
+public class Yolk implements Ingredient {
     private NutritionInfo Nutrition;
 
-    public IngredientClass(NutritionInfo nutrition) {
+    public Yolk(NutritionInfo nutrition) {
         Nutrition = nutrition;
-    }
-
-    public void addToPot() {
-    }
-
-    public void addWater() {
-    }
-
-    public void addOil() {
     }
 
     public void smell() {
     }
 
+    @Override
     public int getHealthRating() {
         smell();
         return Nutrition.getHealthRating();
     }
 
+    @Override
     public String getProtein() {
         return Nutrition.getProtein() + " g";
     }
 
+    @Override
     public String getCalory() {
         return Nutrition.getCalory() + " J";
     }
 }
-
