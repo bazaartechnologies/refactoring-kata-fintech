@@ -3,6 +3,8 @@ package me.aikin.refactoring.observer.pattern;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class WeatherDataTest {
@@ -26,6 +28,7 @@ public class WeatherDataTest {
 
     @Test
     public void reaping_machine_should_start_if_temperature_over_5_degree_and_humidity_over_65() {
+        weatherData.addObserver(reapingMachine);
         weatherData.measurementsChanged(new WeatherParams(10, 70, 0));
         assertTrue(reapingMachine.getStatus());
     }
@@ -35,5 +38,13 @@ public class WeatherDataTest {
         weatherData.measurementsChanged(new WeatherParams(12, 50, 2));
         assertTrue(wateringMachine.getStatus());
     }
+
+    @Test
+    public void reaping_machine_should_not_start_if_temperature_under_5_degree_and_humidity_over_65() {
+        weatherData.addObserver(reapingMachine);
+        weatherData.measurementsChanged(new WeatherParams(3, 70, 0));
+        assertNull(reapingMachine.getStatus());
+    }
+
 
 }
