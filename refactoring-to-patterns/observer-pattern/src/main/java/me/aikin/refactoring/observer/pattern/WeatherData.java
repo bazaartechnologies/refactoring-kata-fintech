@@ -1,6 +1,8 @@
 package me.aikin.refactoring.observer.pattern;
 
-public class WeatherData {
+import java.util.Observable;
+
+public class WeatherData extends Observable {
     private final SeedingMachine seedingMachine;
     private final ReapingMachine reapingMachine;
     private final WateringMachine wateringMachine;
@@ -11,15 +13,18 @@ public class WeatherData {
         this.wateringMachine = wateringMachine;
     }
 
-    public void measurementsChanged(int temp, int humidity, int windPower) {
-        if (temp > 5) {
+    public void measurementsChanged(WeatherParams weatherParams) {
+        if (weatherParams.getTemp() > 5) {
             seedingMachine.start();
 
-            if (humidity > 65)
+        setChanged();
+        notifyObservers(weatherParams.getTemp());
+
+            if (weatherParams.getHumidity() > 65)
                 reapingMachine.start();
         }
 
-        if (temp > 10 && humidity < 55 && windPower < 4)
+        if (weatherParams.getTemp() > 10 && weatherParams.getHumidity() < 55 && weatherParams.getWindPower() < 4)
             wateringMachine.start();
     }
 }
