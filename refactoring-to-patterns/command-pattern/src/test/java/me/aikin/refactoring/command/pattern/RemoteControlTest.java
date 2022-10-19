@@ -11,44 +11,60 @@ public class RemoteControlTest {
     @Test
     public void should_turn_on_light_when_press_first_on_button() {
         Light light = new Light();
-        RemoteControl remoteControl = new RemoteControl(light, null, null);
-        remoteControl.on(1);
+        OnCommand onCommand = new OnCommand(light, null, null);
+        onCommand.setSlot(1);
+        RemoteControl remoteControl = new RemoteControl();
+        remoteControl.takeCommands(onCommand);
+        remoteControl.executeCommands();
 
         assertTrue(light.status());
     }
 
-
     @Test
     public void should_turn_off_light_when_press_first_off_button() {
         Light light = new Light();
-        RemoteControl remoteControl = new RemoteControl(light, null, null);
-        remoteControl.off(1);
+        OffCommand offCommand = new OffCommand(light, null, null);
+        offCommand.setSlot(1);
+        RemoteControl remoteControl = new RemoteControl();
+        remoteControl.takeCommands(offCommand);
+        remoteControl.executeCommands();
+
         assertFalse(light.status());
     }
 
     @Test
     public void should_turn_on_ceiling_when_press_second_on_button() {
         Ceiling ceiling = new Ceiling();
-        RemoteControl remoteControl = new RemoteControl(null, ceiling, null);
-        remoteControl.on(2);
+        OnCommand onCommand = new OnCommand(null, ceiling, null);
+        onCommand.setSlot(2);
+        RemoteControl remoteControl = new RemoteControl();
+        remoteControl.takeCommands(onCommand);
+        remoteControl.executeCommands();
+
         assertEquals(CeilingSpeed.High, ceiling.getSpeed());
     }
-
-
 
     @Test
     public void should_turn_off_ceiling_when_press_second_off_button() {
         Ceiling ceiling = new Ceiling();
-        RemoteControl remoteControl = new RemoteControl(null, ceiling, null);
-        remoteControl.off(2);
+        OffCommand offCommand = new OffCommand(null, ceiling, null);
+        offCommand.setSlot(2);
+        RemoteControl remoteControl = new RemoteControl();
+        remoteControl.takeCommands(offCommand);
+        remoteControl.executeCommands();
+
         assertEquals(CeilingSpeed.Off, ceiling.getSpeed());
     }
 
     @Test
     public void should_turn_on_stereo_when_press_third_on_button() {
         Stereo stereo = new Stereo();
-        RemoteControl remoteControl = new RemoteControl(null, null, stereo);
-        remoteControl.on(3);
+        OnCommand onCommand = new OnCommand(null, null, stereo);
+        onCommand.setSlot(3);
+        RemoteControl remoteControl = new RemoteControl();
+        remoteControl.takeCommands(onCommand);
+        remoteControl.executeCommands();
+
         assertTrue(stereo.getStereoStatus());
         assertTrue(stereo.getCdStatus());
         assertEquals(11, stereo.getVolume());
@@ -57,12 +73,14 @@ public class RemoteControlTest {
     @Test
     public void should_turn_off_stereo_when_press_third_off_button() {
         Stereo stereo = new Stereo();
-        RemoteControl remoteControl = new RemoteControl(null, null, stereo);
-        remoteControl.off(3);
+        OffCommand offCommand = new OffCommand(null, null, stereo);
+        offCommand.setSlot(3);
+        RemoteControl remoteControl = new RemoteControl();
+        remoteControl.takeCommands(offCommand);
+        remoteControl.executeCommands();
+
         assertFalse(stereo.getCdStatus());
         assertFalse(stereo.getCdStatus());
         assertEquals(0, stereo.getVolume());
     }
-
-
 }

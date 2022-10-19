@@ -2,9 +2,9 @@ package me.aikin.refactoring.command.pattern;
 
 public class OnCommand implements Command{
 
-    private Light light;
-    private Ceiling ceiling;
-    private Stereo stereo;
+    private final Light light;
+    private final Ceiling ceiling;
+    private final Stereo stereo;
     private int slot;
 
     public OnCommand(Light light, Ceiling ceiling, Stereo stereo) {
