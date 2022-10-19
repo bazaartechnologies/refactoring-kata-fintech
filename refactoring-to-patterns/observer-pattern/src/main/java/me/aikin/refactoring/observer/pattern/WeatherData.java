@@ -17,8 +17,5 @@ public class WeatherData extends Observable {
 
         setChanged();
         notifyObservers(weatherParams);
-
-        if (weatherParams.getTemp() > 10 && weatherParams.getHumidity() < 55 && weatherParams.getWindPower() < 4)
-            wateringMachine.start();
     }
 }

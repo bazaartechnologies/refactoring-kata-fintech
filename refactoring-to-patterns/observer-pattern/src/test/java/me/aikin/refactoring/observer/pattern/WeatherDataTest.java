@@ -35,6 +35,7 @@ public class WeatherDataTest {
 
     @Test
     public void water_machine_should_start_if_temperature_over_10_degree_and_humidity_less_than_55_and_wind_power_less_than_4() {
+        weatherData.addObserver(wateringMachine);
         weatherData.measurementsChanged(new WeatherParams(12, 50, 2));
         assertTrue(wateringMachine.getStatus());
     }
