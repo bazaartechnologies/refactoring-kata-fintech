@@ -1,24 +1,15 @@
 package me.aikin.refactoring.state.pattern;
 
+import me.aikin.refactoring.state.pattern.solution.MachineState;
+
 public class GumballMachine {
-    public final String insertedQuarterMessage = "insertedQuarterMessage";
-    private final String soldOutMessage = "soldOutMessage";
-    private final String soldMessage = "soldMessage";
-    private final String soldCorrectMessage = "soldCorrectMessage";
-    private final String hasQuarterMessage = "hasQuarterMessage";
-    private final String NoQuarterMessage = "NoQuarterMessage";
-    private final String noGumballMessage = "noGumballMessage";
-    private final String dispenseSuccessMessage = "dispenseSuccessMessage";
-    private final String ejectSuccessMessage = "ejectSuccessMessage";
-
     private int GumballNum;
-    private MachineStatus State;
+    private MachineState State;
 
-    public GumballMachine(int gumballNum, MachineStatus machineStatus) {
+    public GumballMachine(int gumballNum, MachineState machineState) {
         GumballNum = gumballNum;
-        State = machineStatus;
+        State = machineState;
     }
-
 
     public int getGumballNum() {
         return GumballNum;
@@ -28,67 +19,29 @@ public class GumballMachine {
         GumballNum = gumballNum;
     }
 
-    public MachineStatus getState() {
+    public MachineState getState() {
         return State;
     }
 
-    public void setState(MachineStatus state) {
+    public void setState(MachineState state) {
         State = state;
     }
 
 
     public String insertQuarter() {
-        if (State == MachineStatus.SOLD)
-            return soldMessage;
-        if (State == MachineStatus.SOLD_OUT)
-            return soldOutMessage;
-        if (State == MachineStatus.HAS_QUARTER)
-            return hasQuarterMessage;
-
-        State = MachineStatus.HAS_QUARTER;
-        return insertedQuarterMessage;
+        return State.insertQuarter(this);
     }
 
     public String turnCrank() {
-        if (State == MachineStatus.SOLD)
-            return soldMessage;
-        if (State == MachineStatus.NO_QUARTER)
-            return NoQuarterMessage;
-        if (State == MachineStatus.SOLD_OUT)
-            return soldOutMessage;
-
-        State = MachineStatus.SOLD;
-        return soldCorrectMessage;
+        return State.turnCrank(this);
     }
 
     public String dispense() {
-        if (State == MachineStatus.NO_QUARTER)
-            return NoQuarterMessage;
-        if (State == MachineStatus.HAS_QUARTER)
-            return hasQuarterMessage;
-        if (State == MachineStatus.SOLD_OUT)
-            return soldOutMessage;
-
-        GumballNum--;
-        if (GumballNum == 0) {
-            State = MachineStatus.SOLD_OUT;
-            return noGumballMessage;
-        }
-
-        State = MachineStatus.NO_QUARTER;
-        return dispenseSuccessMessage;
+        return State.dispense(this);
     }
 
     public String ejectQuarter() {
-        if (State == MachineStatus.NO_QUARTER)
-            return NoQuarterMessage;
-        if (State == MachineStatus.SOLD_OUT)
-            return soldOutMessage;
-        if (State == MachineStatus.SOLD)
-            return soldMessage;
-
-        State = MachineStatus.NO_QUARTER;
-        return ejectSuccessMessage;
+        return State.ejectQuarter(this);
     }
 }
 
